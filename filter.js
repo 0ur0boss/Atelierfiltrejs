@@ -267,7 +267,11 @@ function rougespe() {
 
 	// CHARGEMENT DES TABLEAUX DE PIXELS
 	prefilter();
-	// 
+	// On calcule la moyenne des couleur pour etre en nuance de gris
+	// En fonction de cette moyenne on class les pixel en 3
+	// 0<noir<85<blueelectrique<170<blanc<255
+	// Puis on les transforme en une des 3 couleur en fonction
+	// ensuite on applique un filtre inversé, pour que le bleu devienne rouge
 	for (var y = 0; y < height; y++) {
 		for (var x = 0; x < width; x++) {
 			var moy = (tr[x][y] + tg[x][y] + tb[x][y]) / 3
@@ -297,5 +301,73 @@ function rougespe() {
 	}
 	
 	// MISE À JOUR DE L'IMAGE
+	postfilter();
+}
+
+function flou() {
+
+	// CHARGEMENT DES TABLEAUX DE PIXELS
+	prefilter();
+
+	// On prends la somme d'un pixel et de tout les pixel qui l entoure (donc 9 en tous)
+	// Puis on le divise par leurs nombre pour obtenir une moyenne qu'on applique au pixel central
+	// Se qui crée un flou
+    for (var y = 1; y < height - 1; y++) { 
+        for (var x = 1; x < width - 1; x++) {
+            tr[x][y] = (tr[x - 1][y + 1] + tr[x][y + 1] + tr[x + 1][y + 1] +
+                tr[x - 1][y] + tr[x][y] + tr[x + 1][y] +
+                tr[x - 1][y - 1] + tr[x][y - 1] + tr[x + 1][y - 1]) / 9;
+            tg[x][y] = (tg[x][y + 1] + tg[x][y] + tg[x][y - 1] +
+                tg[x + 1][y + 1] + tg[x + 1][y] + tg[x + 1][y - 1] +
+                tg[x - 1][y + 1] + tg[x - 1][y] + tg[x - 1][y - 1]) / 9;
+            tb[x][y] = (tb[x][y + 1] + tb[x][y] + tb[x][y - 1] +
+                tb[x + 1][y + 1] + tb[x + 1][y] + tb[x + 1][y - 1] +
+                tb[x - 1][y + 1] + tb[x - 1][y] + tb[x - 1][y - 1]) / 9;
+        }
+    }
+	postfilter();
+
+}
+
+function bug() {
+	prefilter();
+		// Pour chaque couleur, on prends la couleur décalé de quelque pixel puis on 
+		// la deplace de se meme nombre de pixel
+		// effet non voulut : l image se décale
+		for (var y = 0; y < height; y++) {
+			for (var x = 0; x < width - 10; x++) {
+				tr[x][y] = tr[x + 10][y];
+			}
+		}
+		
+		for (var y = 0; y < height; y++) {
+			for (var x = 0; x < width - 20; x++) {
+				tb[x][y] = tb[x + 20][y];
+			}
+		}
+
+		for (var y = 0; y < height; y++) {
+			for (var x = 0; x < width - 30; x++) {
+				tg[x][y] = tg[x + 30][y];
+			}
+		}
+
+		
+	postfilter();
+}
+
+function dégradé() {
+	prefilter();
+	// On rajoute un axe (l'x pour le rouge et l'y pour le vert)
+	// Cela va décallé les couleurs proportionnelment est crée un dégradé
+	for (var y = 0; y < height; y++) {
+		for (var x = 0; x < width; x++) {
+
+			tr[x][y] = tr[x][y] + x;
+			tg[x][y] = tg[x][y] + y;
+			tb[x][y] = tb[x][y];
+
+		}
+	}
 	postfilter();
 }
