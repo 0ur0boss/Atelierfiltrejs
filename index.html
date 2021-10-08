@@ -3,16 +3,31 @@
     <head>
         <meta charset="utf-8">
         <title>Hello, world!</title>
-		<script src="capture.js"></script>
 		<script src="filter.js"></script>
+		<!-- <script src="test.js"></script> -->
 		<link rel="stylesheet" href="main.css" type="text/css" media="all">
     </head>
-    <body style="background-color:rgb(65, 65, 65);">
-		<p>snapshot from webcam by WebRTC <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos">source</a></p>
-		<video id="video">Video stream not available.</video>
-		<button id="startbutton">Take photo</button> 
-		<button id="idinvertbutton">invert photo</button> 
+    <body >
+
+	<div>
+		 <!-- <a href="#"  onMouseOver="javascript:document.img01.src='Beelzebub.png'"> -->
+
+		<!-- <img name="img01" id="photo" src="pixel.png" width='600' height='400'></a> -->
+
+		<img id="photo" name="img01" crossorigin='anonymous' src='face.png'  width='600' height='400' /> 
+ 			<!-- <img 	 alt="Pas d'image chargée !"> -->
 		<canvas id="mycanvas"></canvas>
-		<img id="photo" alt="The screen capture will appear in this box."> 
+	</div>
+
+	<div>
+		<button onclick="negatife();">filtre negatife</button>
+		<button onclick="gris();">filtre nuance de gris</button>
+		<button onclick="rouge();">filtre uniquement rouge</button>
+		<button onclick="trigger();">filtre trigger</button>
+		<button onclick="unpeudetout();">un peu de tout</button>
+		<button onclick="rougespe();">Un rouge spécial</button>
+
+		<button onclick="javascript:document.img01.src='face.png'">Reset de l'image</button>
+	</div>
 	</body>
 </html>
