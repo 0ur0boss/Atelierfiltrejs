@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hello, world!</title>
+		<script src="capture.js"></script>
+		<script src="filter.js"></script>
+		<link rel="stylesheet" href="main.css" type="text/css" media="all">
+    </head>
+    <body style="background-color:rgb(65, 65, 65);">
+		<p>snapshot from webcam by WebRTC <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos">source</a></p>
+		<video id="video">Video stream not available.</video>
+		<button id="startbutton">Take photo</button> 
+		<button id="idinvertbutton">invert photo</button> 
+		<canvas id="mycanvas"></canvas>
+		<img id="photo" alt="The screen capture will appear in this box."> 
+	</body>
+</html>
